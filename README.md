@@ -3,7 +3,7 @@
 > Refer：[domnikl/DesignPatternsPHP](https://github.com/domnikl/DesignPatternsPHP)
 
 ## 安装
-````
+````php
 composer install
 ````
 
