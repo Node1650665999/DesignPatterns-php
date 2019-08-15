@@ -30,7 +30,7 @@ function dd(... $param)
 ## 创建型
 
 ### 简单工厂模式
-````
+````php
 use DesignPatterns\Creational\SimpleFactory\SimpleFactory;
 use DesignPatterns\Creational\SimpleFactory\Bicycle;
 
@@ -96,8 +96,10 @@ dd($ofTruck, $ofCar);  // true  true
 ### 单例模式
 ````
 use DesignPatterns\Creational\Singleton\Singleton;
+
 $singleton  = Singleton::getInstance();
 $singleton2 = Singleton::getInstance();
+
 dd($singleton === $singleton2);  // true
 ````
 
