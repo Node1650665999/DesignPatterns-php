@@ -147,6 +147,7 @@ $barCopy = clone $bar;
 $bar->setTitle('test');
 
 dd($bar->getTitle(),$barRef->getTitle(), $barCopy->getTitle());  // test test nothing
+
 ```
 
 ## 结构型
