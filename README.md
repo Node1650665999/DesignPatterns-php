@@ -11,13 +11,13 @@ composer install
 
 在当前目录新建 [test.php](./test.php),引入 autoload.php
 
-````
+````php
 require  './vendor/autoload.php';
 ````
 
 为了方便打印结果，我们在 test.php 中定义一个函数
 
-````
+````php
 /**
  * @param mixed ...$param
  */
@@ -41,7 +41,7 @@ dd($bicycle instanceof Bicycle); // true
 
 
 ### 工厂方法模式
-````
+````php
 use DesignPatterns\Creational\FactoryMethod\StdoutLoggerFactory;
 use DesignPatterns\Creational\FactoryMethod\FileLoggerFactory;
 use DesignPatterns\Creational\FactoryMethod\Logger;
@@ -55,7 +55,7 @@ dd($stdLoggerIsLogger, $fileLoggerIsLogger); // true true
 ````
 
 ### 抽象工厂模式
-````
+````php
 use DesignPatterns\Creational\AbstractFactory\ProductFactory;
 
 $product 		 = new ProductFactory();
@@ -66,7 +66,7 @@ dd($priceDigital, $priceShippable);   // 100  150
 ````
 
 ### 静态工厂模式
-````
+````php
 use DesignPatterns\Creational\StaticFactory\StaticFactory;
 use DesignPatterns\Creational\StaticFactory\FormatString;
 use DesignPatterns\Creational\StaticFactory\FormatNumber;
@@ -78,7 +78,7 @@ dd($stringFormatter instanceof FormatString, $numberFormatter instanceof FormatN
 ````
 
 ### 建造者模式
-````
+````php
 use DesignPatterns\Creational\Builder\TruckBuilder;
 use DesignPatterns\Creational\Builder\CarBuilder;
 use DesignPatterns\Creational\Builder\Parts\Truck;
@@ -94,7 +94,7 @@ dd($ofTruck, $ofCar);  // true  true
 ````
 
 ### 单例模式
-````
+````php
 use DesignPatterns\Creational\Singleton\Singleton;
 
 $singleton  = Singleton::getInstance();
@@ -105,7 +105,7 @@ dd($singleton === $singleton2);  // true
 
 ### 多例模式
 > 和单例模式不一样的地方在于，$instances改成了一个存贮多个对象的数组
-````
+````php
 use DesignPatterns\Creational\Multiton\Multiton;
 
 $multiton1   = Multiton::getInstance(Multiton::INSTANCE_1);
@@ -118,7 +118,7 @@ dd($multiton1 === $multiton2);   // false
 
 ### 对象池模式
 > 对象池的目的在于降低对象创建的消耗,其表现为将创建好的对象存储到某个容器中,这样下次使用时直接从这个容器中取出该对象就可以了.
-````
+````php
 use DesignPatterns\Creational\Pool\WorkerPool;
 
 $pool  = new  WorkerPool();
@@ -134,7 +134,7 @@ dd($work3 === $worker4);	  // true
 
 ### 原型模式
 > 原型模式核心在于 clone, 相比正常 new 一个对象, 克隆它会更节省开销,clone 会对对象的所有属性执行一个浅复制.
-````
+````php
 use DesignPatterns\Creational\Prototype\BarBookPrototype;
 
 $bar     = new BarBookPrototype();
