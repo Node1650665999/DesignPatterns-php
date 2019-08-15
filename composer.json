@@ -1,0 +1,17 @@
+{
+    "name": "administrator/design-patterns",
+    "authors": [
+        {
+            "name": "田田",
+            "email": "1650665999@qq.com"
+        }
+    ],
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "DesignPatterns\\": "../DesignPatterns-php"
+        }
+    }
+}
