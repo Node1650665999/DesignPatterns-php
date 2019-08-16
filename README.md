@@ -195,7 +195,7 @@ dd($html === '<p>Hello World</p>', $text === 'Hello World'); // true true
 
 > 假设每个创建的 Dom 元素都有一个 `render()` 方法用来生成各自的 HTML 元素, 例如 `Form 表单` 进行 render()会生成一个表单元素,
 `Input 框` render() 会生成一个输入框. <br>
-> 我们知道 form 表单是可以通过 【input 框,button 按钮】 组合而来的,这里 form 表单就是一个组合元素, nput 就是一个子元素,
+> 我们知道 form 表单是可以通过 【input 框,button 按钮】 组合而来的,这里 form 表单就是一个组合元素, input 就是一个子元素,
 但是对于用户来说它们是无区别的, form 表单和 input 框都是 HTML 元素, 它们都有相同的行为 render(),都是生成一个html元素而已.
 
 ```php
@@ -278,7 +278,7 @@ dd($query);  //SELECT foo, bar FROM foobar AS f WHERE f.bar ="bar" AND f.foo="fo
 
 ### 享元模式
 
-> 享元模式和对象池模式都是为了实现对象的共享,以减少内存的开销; 这两者存储对象的方式不一样,`享元模式中容器存储的存贮对象的 key 是创建这个对象时参数`,
+> 享元模式和对象池模式都是为了实现对象的共享,以减少内存的开销; 这两者存储对象的方式不一样,`享元模式中容器存储的对象的 key 是创建这个对象时参数`,
 而对象池模式中容器存储对象的key是类名,这就意味者享元模式下一个类可以有很多对象, 而对象池模式一个类只能有一个对象, 尽管它们内部都用一个容器存储已经创建的对象.
 
 ```php
@@ -291,4 +291,29 @@ $flyweightC     = $factory->get('b');
 
 dd(count($factory));   // 2
 ```
-> 因为 $flyweightA 和 $flyweightB 的状态不同, 但 $flyweightB 和 $flyweightC又是同一个对象,因此最终计算出的享元对象的形态有两种，所以输出2.
+> 因为 $flyweightA 和 $flyweightB 的状态不同, 但 $flyweightB 和 $flyweightC 又是同一个对象,因此最终计算出的享元对象的形态有两种，所以输出2.
+
+### 代理模式
+> 代理模式（Proxy）为其他对象提供一种代理以控制对这个对象的访问。使用代理模式创建代理对象，让代理对象控制目标对象的访问，并且可以在不改变目标对象的情况下添加一些额外的功能。
+<br>
+> 在某些情况下，一个客户不想或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用，并且可以通过代理对象去掉客户不能看到的内容和服务或者添加客户需要的额外服务。
+
+```php
+use DesignPatterns\Structural\Proxy\RecordProxy;
+
+$proxy = new RecordProxy($data);
+$proxy->xyz = false;
+dd($proxy->isDirty()); // true
+```
+
+### 注册器模式
+> 注册器模式（Registry）也叫做注册树模式，注册器模式为应用中经常使用的对象创建一个中央存储器来存放这些对象,通常通过一个只包含静态方法的抽象类来实现(或者通过单例模式).
+
+```php
+use  DesignPatterns\Structural\Registry\Registry;
+
+Registry::set(Registry::LOGGER, new StdClass());
+$logger    = Registry::get(Registry::LOGGER);
+
+dd($logger instanceof  StdClass);  // true
+```
