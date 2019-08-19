@@ -228,7 +228,7 @@ dd($user->getUsername());       // tcl
 ```
 
 ### 装饰器模式
-> 装饰器模式的目的在于为类实例动态增加新的方法,如果你需要扩展一个类的功能，并且不想增加子类的话,那么装饰器模式就非常适合你.
+> 装饰器模式的目的在于为类实例动态增加新的方法,如果你需要扩展一个类的功能,并且不想增加子类的话,那么装饰器模式就非常适合你.
 
 ```php
 use DesignPatterns\Structural\Decorator\Webservice;
@@ -317,3 +317,60 @@ $logger    = Registry::get(Registry::LOGGER);
 
 dd($logger instanceof  StdClass);  // true
 ```
+
+##行为型
+
+### 中介者模式
+> 中介者模式（Mediator Pattern）是用来降低多个对象和类之间的通信复杂性,这种模式提供了一个中介类,该类通常处理不同类之间的通信,并支持松耦合,使代码易于维护.
+
+`中介者模式中各个对象虽彼此协同却不知彼此,只知中介者 Mediator,使各对象不需要显式地相互引用`.
+```php
+use DesignPatterns\Behavioral\Mediator\Mediator;
+use DesignPatterns\Behavioral\Mediator\Subsystem\Client;
+use DesignPatterns\Behavioral\Mediator\Subsystem\Database;
+use DesignPatterns\Behavioral\Mediator\Subsystem\Server;
+
+$server     = new Server();
+new Mediator(new Database(), new Client(), $server);
+$server->process();   // Hello World
+```
+> 整个调用流程为 process() >> Mediator->sendResponse() >> Client->output,可以看到 Server 通过 Mediator (中介者) 最终访问了 Client 的 output, 
+而 Server 与 Client 他们是不知道彼此的,完全借助 Mediator 通信.
+
+### 备忘录模式
+> 备忘录((Memento))模式就是在不破坏封装的前提下,捕获一个对象的内部状态,并在该对象之外保存这个状态,以便在适当的时候恢复对象.
+
+```php
+use DesignPatterns\Behavioral\Memento\Ticket;
+
+$ticket = new Ticket();
+
+// 在备忘录中记录 Ticket 的状态(STATE_OPENED)
+$ticket->open();
+$memento     = $ticket->saveToMemento();
+
+// 再次修改 ticket 的状态(这时状态是 STATE_ASSIGNED)
+$ticket->assign();
+echo $ticket->getState();  // STATE_ASSIGNED
+
+// 从备忘录中恢复该状态,发现状态从由 STATE_ASSIGNED 变为了 STATE_OPENED
+$ticket->restoreFromMemento($memento);
+echo $ticket->getState();   // STATE_OPENED
+```
+
+### 空对象模式
+> 空对象 (NullObject) 可以用在数据不可用的时候提供默认的行为, 用来替换代码中判断对象是否为 null 的场景;
+> 例如 `if (!is_null($obj)) { $obj->callSomething(); }` 只需 `$obj->callSomething()` 就行.
+```php
+use DesignPatterns\Behavioral\NullObject\Service;
+use DesignPatterns\Behavioral\NullObject\PrintLogger;
+use DesignPatterns\Behavioral\NullObject\NullLogger;
+
+$servicePrint = new Service(new PrintLogger());
+$servicePrint->doSomething();
+
+//像黑洞一样,啥都不输出
+$serviceNullObject = new Service(new NullLogger());
+$serviceNullObject->doSomething();
+```
+
