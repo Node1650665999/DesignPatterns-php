@@ -389,3 +389,24 @@ $user->changeEmail('foo@bar.com');
 
 dd(count($observer->getChangedUsers()));  // 1
 ```
+
+### 状态模式
+> 状态模式能够让对象在运行时通过修改其内部的状态对象进而改变自身的行为,状态模式和命令模式一样,用于消除 if...else 等条件选择语句.
+
+我们创建表示各种状态的对象和一个行为随着状态对象改变而改变的 context 对象.
+
+```php
+use DesignPatterns\Behavioral\State\ContextOrder;
+use DesignPatterns\Behavioral\State\CreateOrder;
+$order        = new CreateOrder();
+$contextOrder = new ContextOrder();
+$contextOrder->setState($order);
+
+// 调用的是 CreateOrder 对象的 done(),但在done()内部却将状态对象篡改成了 ShippingOrder对象
+$contextOrder->done();
+dd($contextOrder->getStatus());  // shipping
+
+// 尽管看着像是调用了两次done()方法, 但其实调用的是 CreateOrder 对象的 done(), 因为内部状态对象已经变成了 ShippingOrder
+$contextOrder->done();
+dd($contextOrder->getStatus());  // completed
+```
