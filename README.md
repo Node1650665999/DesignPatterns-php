@@ -406,7 +406,7 @@ $contextOrder->setState($order);
 $contextOrder->done();
 dd($contextOrder->getStatus());  // shipping
 
-// 尽管看着像是调用了两次done()方法, 但其实调用的是 CreateOrder 对象的 done(), 因为内部状态对象已经变成了 ShippingOrder
+// 尽管看着像是调用了两次done()方法, 但其实调用的是 ShippingOrder 对象的 done()
 $contextOrder->done();
 dd($contextOrder->getStatus());  // completed
 ```
