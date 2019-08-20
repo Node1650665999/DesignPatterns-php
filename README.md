@@ -410,3 +410,15 @@ dd($contextOrder->getStatus());  // shipping
 $contextOrder->done();
 dd($contextOrder->getStatus());  // completed
 ```
+
+### 策略模式
+```php
+use DesignPatterns\Behavioral\Strategy\OperationAdd;
+use DesignPatterns\Behavioral\Strategy\OperationSubstract;
+use DesignPatterns\Behavioral\Strategy\Context;
+
+$context = new Context(new OperationAdd());
+dd($context->executeStrategy(2,2)); // 4
+$context = new Context(new OperationSubstract());
+dd($context->executeStrategy(2,2));  // 0
+```

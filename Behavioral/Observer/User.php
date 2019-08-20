@@ -41,7 +41,9 @@ class User implements \SplSubject
     public function notify()
     {
         /** @var \SplObserver $observer */
-        foreach ($this->observers as $observer) {
+        foreach ($this->observers as $observer)
+        {
+            // 将 this 传给每个观察者，以便观察者能获得当前Subject的状态
             $observer->update($this);
         }
     }
