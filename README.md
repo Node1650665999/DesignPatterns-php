@@ -296,7 +296,7 @@ dd(count($factory));   // 2
 
 ### 代理模式
 > 代理模式（Proxy）为其他对象提供一种代理以控制对这个对象的访问。使用代理模式创建代理对象，让代理对象控制目标对象的访问，并且可以在不改变目标对象的情况下添加一些额外的功能。
-<br>
+
 > 在某些情况下，一个客户不想或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用，并且可以通过代理对象去掉客户不能看到的内容和服务或者添加客户需要的额外服务。
 
 ```php
@@ -319,7 +319,7 @@ $logger    = Registry::get(Registry::LOGGER);
 dd($logger instanceof  StdClass);  // true
 ```
 
-##行为型
+## 行为型
 
 ### 中介者模式
 > 中介者模式（Mediator Pattern）是用来降低多个对象和类之间的通信复杂性,这种模式提供了一个中介类,该类通常处理不同类之间的通信,并支持松耦合,使代码易于维护.
@@ -345,12 +345,12 @@ $server->process();   // Hello World
 use DesignPatterns\Behavioral\Memento\Ticket;
 
 $ticket = new Ticket();
+$ticket->open();
 
 // 在备忘录中记录 Ticket 的状态(STATE_OPENED)
-$ticket->open();
 $memento     = $ticket->saveToMemento();
 
-// 再次修改 ticket 的状态(这时状态是 STATE_ASSIGNED)
+// 再次修改 Ticket 的状态(这时状态是 STATE_ASSIGNED)
 $ticket->assign();
 echo $ticket->getState();  // STATE_ASSIGNED
 
@@ -375,3 +375,17 @@ $serviceNullObject = new Service(new NullLogger());
 $serviceNullObject->doSomething();
 ```
 
+### 观察者模式
+> 对象间存在一对多关系时,当状态发生变化时,所有依赖于它的对象都得到通知并被自动更新.
+
+```php
+use DesignPatterns\Behavioral\Observer\User;
+use DesignPatterns\Behavioral\Observer\UserObserver;
+
+$observer = new UserObserver();
+$user = new User();
+$user->attach($observer);
+$user->changeEmail('foo@bar.com');
+
+dd(count($observer->getChangedUsers()));  // 1
+```
