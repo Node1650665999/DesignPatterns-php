@@ -335,7 +335,7 @@ $server     = new Server();
 new Mediator(new Database(), new Client(), $server);
 $server->process();   // Hello World
 ```
-> 整个调用流程为 process() >> Mediator->sendResponse() >> Client->output,可以看到 Server 通过 Mediator (中介者) 最终访问了 Client 的 output, 
+> 整个调用流程为 Server->process() >> Mediator->sendResponse() >> Client->output,可以看到 Server 通过 Mediator (中介者) 最终访问了 Client 的 output, 
 而 Server 与 Client 他们是不知道彼此的,完全借助 Mediator 通信.
 
 ### 备忘录模式
@@ -391,7 +391,8 @@ dd(count($observer->getChangedUsers()));  // 1
 ```
 
 ### 状态模式
-> 状态模式能够让对象在运行时通过修改其内部的状态对象进而改变自身的行为,状态模式和命令模式一样,用于消除 if...else 等条件选择语句.
+> 状态模式常用在代码中包含大量与对象状态有关的条件语句,状态模式和命令模式一样,用于消除 if...else 等条件选择语句.
+> 实现应将各种具体的状态类抽象出来,并且状态类不应超过 5 个.
 
 我们创建表示各种状态的对象和一个行为随着状态对象改变而改变的 context 对象.
 
@@ -412,6 +413,7 @@ dd($contextOrder->getStatus());  // completed
 ```
 
 ### 策略模式
+>  策略模式也可以用于解决 if...else 所带来的复杂和难以维护.
 ```php
 use DesignPatterns\Behavioral\Strategy\OperationAdd;
 use DesignPatterns\Behavioral\Strategy\OperationSubstract;
@@ -421,4 +423,19 @@ $context = new Context(new OperationAdd());
 dd($context->executeStrategy(2,2)); // 4
 $context = new Context(new OperationSubstract());
 dd($context->executeStrategy(2,2));  // 0
+```
+
+### 模板模式
+> 抽象对象由抽象方法和模版方法组成,为防止恶意操作,模板方法一般都加上 final 关键词;
+抽象对象子类可以按需要重写方法实现,但调用将以抽象类中定义的方式进行.
+
+```php
+use DesignPatterns\Behavioral\TemplateMethod\Basketball;
+use DesignPatterns\Behavioral\TemplateMethod\Football;
+
+$basketball = new Basketball();
+$football   = new Football();
+
+dd($basketball->play());
+dd($football->play());
 ```

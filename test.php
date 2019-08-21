@@ -11,3 +11,11 @@ function dd(... $param)
 
 
 //== TODO ==
+use DesignPatterns\Behavioral\TemplateMethod\Basketball;
+use DesignPatterns\Behavioral\TemplateMethod\Football;
+
+$basketball = new Basketball();
+$football   = new Football();
+
+dd($basketball->play());
+dd($football->play());

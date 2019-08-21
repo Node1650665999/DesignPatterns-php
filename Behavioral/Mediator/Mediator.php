@@ -32,6 +32,7 @@ class Mediator implements MediatorInterface
         $this->server = $server;
         $this->client = $client;
 
+        // 传入中简介到各个对象
         $this->database->setMediator($this);
         $this->server->setMediator($this);
         $this->client->setMediator($this);
