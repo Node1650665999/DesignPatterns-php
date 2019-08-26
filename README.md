@@ -302,7 +302,7 @@ dd(count($factory));   // 2
 ```php
 use DesignPatterns\Structural\Proxy\RecordProxy;
 
-$proxy = new RecordProxy($data);
+$proxy = new RecordProxy($data = []);
 $proxy->xyz = false;
 dd($proxy->isDirty()); // true
 ```
@@ -427,7 +427,7 @@ dd($context->executeStrategy(2,2));  // 0
 
 ### 模板模式
 > 抽象对象由抽象方法和模版方法组成,为防止恶意操作,模板方法一般都加上 final 关键词;
-抽象对象子类可以按需要重写方法实现,但调用将以抽象类中定义的方式进行.
+抽象对象子类可以按需要重写方法实现,`但调用将以抽象类中定义的方式进行`.
 
 ```php
 use DesignPatterns\Behavioral\TemplateMethod\Basketball;
@@ -438,4 +438,21 @@ $football   = new Football();
 
 dd($basketball->play());
 dd($football->play());
+```
+
+### 访问者模式
+> 访问者模式主要解决稳定的数据结构和易变的操作耦合问题,目的在于数据结构与数据操作分离,
+它可以在不改变数据结构的前提下定义作用于这些元素的新的操作,可达到为一个元素(被访问者)动态添加新的操作而无需做其它修改的效果;
+
+`该模式的关键在于元素对象中有一个方法接受访问者,将自身引用传入访问者`.
+
+```php
+use DesignPatterns\Behavioral\Visitor\RoleVisitor;
+use DesignPatterns\Behavioral\Visitor\Group;
+
+$vistor     = new RoleVisitor();
+$group      = new Group('admin');
+$group->accept($vistor);
+
+dd($vistor->getVisited());
 ```

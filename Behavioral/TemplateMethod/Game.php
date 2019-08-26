@@ -2,7 +2,6 @@
 namespace DesignPatterns\Behavioral\TemplateMethod;
 abstract class Game
 {
-
     /**
      * 子类可以按需要重写方法实现,但调用将以抽象类中定义的方式进行
      * @return array
