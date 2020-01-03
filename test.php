@@ -6,7 +6,7 @@ require  './vendor/autoload.php';
  */
 function dd(... $param)
 {
-	var_dump($param); 
+	var_dump($param);
 }
 
 
