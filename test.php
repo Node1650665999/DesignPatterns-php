@@ -11,9 +11,3 @@ function dd(... $param)
 
 
 //== TODO ==
-
-add a
-
-add b
-
-add c
